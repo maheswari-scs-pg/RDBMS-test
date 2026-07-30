@@ -16,19 +16,20 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: CollegeDB
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping"
+          --health-cmd="mysqladmin ping -h localhost -uroot -proot"
           --health-interval=10s
           --health-timeout=5s
-          --health-retries=5
+          --health-retries=10
 
 
     steps:
 
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
 
     - name: Install MySQL Client
@@ -37,14 +38,19 @@ jobs:
         sudo apt-get install mysql-client -y
 
 
+    - name: Wait for MySQL
+      run: |
+        sleep 20
+
+
     - name: Execute Student SQL
       run: |
-        mysql -uroot -proot < starter.sql
+        mysql -h 127.0.0.1 -P 3306 -uroot -proot < starter.sql
 
 
     - name: Run Test Cases
       run: |
-        mysql -uroot -proot < testcase.sql
+        mysql -h 127.0.0.1 -P 3306 -uroot -proot < testcase.sql
 
 
     - name: Assignment Completed
