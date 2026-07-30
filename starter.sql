@@ -1,16 +1,26 @@
 -- Create Database
+CREATE DATABASE CollegeDB;
 
--- Write your query here
-create database CollegeDB
 
--- Use Database
+-- Select Database
+USE CollegeDB;
 
-use CollegeDB
+
 -- Create Department Table
+CREATE TABLE Department
+(
+    DepartmentID INT(5) PRIMARY KEY,
+    DepartmentName VARCHAR(20),
+    HOD VARCHAR(20)
+);
 
-create table Department(Dept_Id int(5) primary key,Dept_Name varchar(25),Hod varchar(20));
--- Insert Records
-insert into Department values(101,DS,Dr.Grace)
-insert into Department values(102,BCA,Dr.Padma)
 
--- Display Department Details
+-- Insert Sample Records
+INSERT INTO Department VALUES
+(101,'Computer Science','Dr.Ravi'),
+(102,'Commerce','Dr.Kumar'),
+(103,'Mathematics','Dr.Sudha');
+
+
+-- Display Records
+SELECT * FROM Department;
