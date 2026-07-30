@@ -11,6 +11,6 @@ CREATE TABLE Department
 
 INSERT INTO Department
 VALUES
-(101,'Computer Science','Dr.Ravi'),
-(102,'Commerce','Dr.Kumar'),
-(103,'Mathematics','Dr.Sudha');
+(110,'Computer Science','Dr.Ravi'),
+(111,'Commerce','Dr.Kumar'),
+(112,'Mathematics','Dr.Sudha');
