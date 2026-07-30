@@ -1,4 +1,6 @@
 -- Create Database
+drop database if exist CollegeDB;
+
 CREATE DATABASE CollegeDB;
 
 
