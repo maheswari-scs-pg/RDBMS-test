@@ -1,3 +1,12 @@
+-- =====================================
+-- Test Cases for CollegeDB Assignment
+-- =====================================
+
+USE CollegeDB;
+
+
+-- Test 1: Check Database Selection
+
 SELECT DATABASE();
 
 
@@ -11,17 +20,18 @@ SHOW TABLES;
 DESC Department;
 
 
--- Test 4: Check Primary Key
+-- Test 4: Verify Primary Key
 
 SELECT 
 COLUMN_NAME,
 CONSTRAINT_NAME
 FROM information_schema.KEY_COLUMN_USAGE
-WHERE TABLE_NAME='Department'
+WHERE TABLE_SCHEMA='CollegeDB'
+AND TABLE_NAME='Department'
 AND CONSTRAINT_NAME='PRIMARY';
 
 
--- Test 5: Insert Validation Data
+-- Test 5: Insert Test Records
 
 INSERT INTO Department
 VALUES
@@ -33,3 +43,9 @@ VALUES
 -- Test 6: Display Records
 
 SELECT * FROM Department;
+
+
+-- Test 7: Count Records
+
+SELECT COUNT(*) AS Total_Departments
+FROM Department;
