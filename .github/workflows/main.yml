@@ -1,58 +1,103 @@
 name: SQL Assignment Autograding
 
+
 on:
   push:
     branches:
       - main
 
+  workflow_dispatch:
+
+
 jobs:
 
-  mysql-test:
+  mysql-testing:
 
     runs-on: ubuntu-latest
 
+
     services:
+
       mysql:
+
         image: mysql:8.0
+
         env:
+
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: CollegeDB
+
         ports:
+
           - 3306:3306
+
+
         options: >-
-          --health-cmd="mysqladmin ping -h localhost -uroot -proot"
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=10
 
 
+
     steps:
 
+
+    # Download Student Code
+
     - name: Checkout Repository
+
       uses: actions/checkout@v4
 
 
+
+    # Install MySQL Client
+
     - name: Install MySQL Client
+
       run: |
+
         sudo apt-get update
+
         sudo apt-get install mysql-client -y
 
 
+
+    # Wait for MySQL Server
+
     - name: Wait for MySQL
+
       run: |
+
         sleep 20
 
 
-    - name: Execute Student SQL
+
+    # Execute Student SQL
+
+    - name: Execute Student Solution
+
       run: |
+
         mysql -h 127.0.0.1 -P 3306 -uroot -proot < starter.sql
 
 
-    - name: Run Test Cases
+
+    # Execute Test Cases
+
+    - name: Execute Test Cases
+
       run: |
+
         mysql -h 127.0.0.1 -P 3306 -uroot -proot < testcase.sql
 
 
+
     - name: Assignment Completed
+
       run: |
+
+        echo "================================"
+
         echo "SQL Assignment Passed Successfully"
+
+        echo "================================"
